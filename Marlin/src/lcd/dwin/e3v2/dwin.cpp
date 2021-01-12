@@ -2560,7 +2560,7 @@ void HMI_Control() {
   void HMI_Leveling() {
     Popup_Window_Leveling();
     DWIN_UpdateLCD();
-    queue.inject_P(PSTR("G28O\nG29"));
+    queue.inject_P(PSTR("M140 S60\nM190 S60\nG28\nG29 P1\nG29 P3\nG29 S1\nG29 F10\nG29 A"));
   }
 
 #endif
