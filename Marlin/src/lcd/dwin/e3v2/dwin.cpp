@@ -1382,7 +1382,7 @@ void HMI_ZoffsetRT() {
         checkkey = ZTool;
         DWIN_Draw_Signed_Float(font8x16, Color_Bg_Black, 2, 2, 202, MBASE(1), TERN(HAS_ONESTEP_LEVELING, probe.offset.z*100, HMI_ValueStruct.offset_value));
       }
-      
+
       DWIN_UpdateLCD();
       return;
     }
@@ -2405,11 +2405,11 @@ inline void Draw_AUX_Menu() {
     DWIN_Frame_AreaCopy(1, 192, 1, 271-38, 479-465, 14, 8);
 
      DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(1), (char*)"To Bottom Left");
-    
+
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(2), (char*)"To Top Left");
 
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(3), (char*)"To Top Right");
-    
+
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(4), (char*)"To Bottom Right");
 
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(5), (char*)"To Center");
@@ -2421,19 +2421,19 @@ inline void Draw_AUX_Menu() {
       DWIN_Frame_AreaCopy(1, 231, 2, 271-6, 479-467, 14, 8);
     #endif
 
-    //draw_move_en(MBASE(1));         
+    //draw_move_en(MBASE(1));
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(1), (char*)"To Bottom Left");
-    
-    //draw_move_en(MBASE(2));   
+
+    //draw_move_en(MBASE(2));
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(2), (char*)"To Top Left");
 
-    //draw_move_en(MBASE(3));   
+    //draw_move_en(MBASE(3));
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(3), (char*)"To Top Right");
-  
-    //draw_move_en(MBASE(4));   
+
+    //draw_move_en(MBASE(4));
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(4), (char*)"To Bottom Right");
 
-    //draw_move_en(MBASE(5));   
+    //draw_move_en(MBASE(5));
     DWIN_Draw_String(false,false,font8x16,Color_White,Color_Bg_Black, 64, MBASE(5), (char*)"To Center");
 
   }
@@ -2795,7 +2795,7 @@ void HMI_Control() {
     Popup_Window_Leveling();
     DWIN_UpdateLCD();
     gcode.process_subcommands_now_P( PSTR("M220 S100"));
-    queue.inject_P(PSTR("G28O\nG29"));
+    queue.inject_P(PSTR("M140 S60\nM190 S60\nG28\nG29 P1\nG29 P3\nG29 S1\nG29 F10\nG29 A"));
   }
 
 #endif
@@ -3343,7 +3343,7 @@ void HMI_AUX() {
         gcode.process_subcommands_now_P( PSTR("G1 X20 Y20"));
         gcode.process_subcommands_now_P( PSTR("G1 F300 Z0"));
         gcode.process_subcommands_now_P( PSTR("M220 S100"));
-        
+
         planner.synchronize();
         break;
       case 2: // top left
@@ -3375,7 +3375,7 @@ void HMI_AUX() {
         gcode.process_subcommands_now_P( PSTR("G1 F300 Z0"));
         gcode.process_subcommands_now_P( PSTR("M220 S100"));
       planner.synchronize();
-         
+
         break;
       case 5: // transmission ratio
         //checkkey = Move5;
@@ -3507,7 +3507,7 @@ void HMI_ZTool() {
         sprintf_P(gcode_string, PSTR("M851 Z%.2f"), (dwin_zoffset));
         gcode.process_subcommands_now_P(PSTR(gcode_string ));
         gcode.process_subcommands_now_P( PSTR("G28 Z")); //Rehome Z only
-        gcode.process_subcommands_now_P( PSTR("G1 F300 Z0")); 
+        gcode.process_subcommands_now_P( PSTR("G1 F300 Z0"));
         break;
       default:
         break;
