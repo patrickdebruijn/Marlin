@@ -45,6 +45,9 @@ enum processID : uint8_t {
   Prepare,
   Control,
   Leveling,
+  AUX,
+  Refuel,
+  ZTool,
   PrintProcess,
   AxisMove,
   TemperatureID,
@@ -75,11 +78,18 @@ enum processID : uint8_t {
   Move_X,
   Move_Y,
   Move_Z,
+  Move1,
+  Move2,
+  Move3,
+  Move4,
+  Move5,
+  Homeoffset,
+  HomeoffsetRT,
   #if HAS_HOTEND
     Extruder,
+    Extruder_Refuel,
     ETemp,
   #endif
-  Homeoffset,
   #if HAS_HEATED_BED
     BedTemp,
   #endif
@@ -249,7 +259,7 @@ typedef struct {
     float Move_E_scale    = 0;
   #endif
   float offset_value      = 0;
-  int8_t show_mode        = 0; // -1: Temperature control    0: Printing temperature
+  char show_mode          = 0;    // -1: Temperature control    0: Printing temperature
 } HMI_value_t;
 
 #define DWIN_CHINESE 123
@@ -302,6 +312,7 @@ void ICON_Stop(bool show);
 
 void Popup_Window_Resume();
 void Popup_Window_Home(const bool parking=false);
+void Popup_Window_Aux(void);
 void Popup_Window_Leveling();
 
 void Goto_PrintProcess();
@@ -314,6 +325,7 @@ void HMI_Move_Z();
 void HMI_Move_E();
 
 void HMI_Zoffset();
+void HMI_ZoffsetRT();
 
 TERN_(HAS_HOTEND,     void HMI_ETemp());
 TERN_(HAS_HEATED_BED, void HMI_BedTemp());

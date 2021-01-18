@@ -190,7 +190,3 @@ __pycache__
 # Simulation / Native
 eeprom.dat
 imgui.ini
-
-.github
-.editorconfig
-.idea
