@@ -2795,7 +2795,7 @@ void HMI_Control() {
     Popup_Window_Leveling();
     DWIN_UpdateLCD();
     gcode.process_subcommands_now_P( PSTR("M220 S100"));
-    queue.inject_P(PSTR("M140 S60\nM190 S60\nG28\nG29 P1\nG29 P3\nG29 S1\nG29 F10\nG29 A"));
+    queue.inject_P(PSTR("G28O\nG29"));
   }
 
 #endif
